@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+
+
+
+<html class="no-js" lang="zh-CN" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <title>试析社交类 APP 的设计思路 | 极客公园</title>
+  <meta name="keywords" content="社交网络APP,社交网络,手机应用,互联网产品,互联网趋势,极客公园, Geekpark, 极客, 极客观察, 极客广播, 极客活动, Geek, Geeker" />
+  <meta name="description" content="社交类 APP 如何赢得市场和用户，还需要遵从以下几点：明确的客群定位；合理的撮合方式；适度的认证手段和行为记录功能；有效的推广方式；稳定的运行后台；清晰的盈利模式。" />
+  <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.5"/>
+  <meta name="robots" content="index, follow" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144x144-precomposed.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/public/apple-touch-icon-114x114-precomposed.png" />
+  <link rel="apple-touch-icon" sizes="72x72"   href="/public/apple-touch-icon-72x72-precomposed.png" />
+  <link rel="apple-touch-icon" sizes="57x57"   href="/public/apple-touch-icon-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" href="/public/apple-touch-icon-precomposed.png" />
+  <link rel="apple-touch-startup-image" href="/public/startup.png" />
+  <link rel="alternate" type="application/rss+xml" title="极客公园 RSS Feed" href="http://feeds.geekpark.net/" />
+  <link rel="stylesheet" href="/public/css/style.css?v=2.0" />
+  <link rel="stylesheet" href="/public/css/icons.css" />
+  <link rel="stylesheet" href="/public/css/event.css" />
+  <link rel="stylesheet" href="/public/js/libs/jquery.toolBar/jquery.toolBar.css">
+  
+  <link rel="stylesheet" href="/public/css/article.css" />  <link rel="stylesheet" href="/public/js/libs/fancybox/jquery.fancybox.css" />
+  
+  
+        
+        
+  
+</head>
+<body class="event ">
+  <div id="container">
+    <header id="header">
+      <div class='container'>
+        <h1><span class='geekpark-logo'></span><a class="png_bg" href='/'>GeekPark</a><sup>2013</sup></h1>
+        <nav class='global'>
+          <ul>
+            <li class=''>
+              <a href='/' title="首页">首页</a>
+            </li>
+            <li class='on'>
+              <a href='/read/seed' title="极客观察">极客观察</a>
+              <ul style="display:none;">
+                <li><a href="#">极客人物</a></li>
+                <li><a href="#">每周一品</a></li>
+                <li><a href="#">极客攻略</a></li>
+                <li><a href="#">极客早知道</a></li>
+                <li class="hr"></li>
+                <li><a href="#">极客快闻</a></li>
+              </ul>
+            </li>
+            <li class=''>
+              <a href='/cast/' title="极客广播">极客广播</a>
+            </li>
+            <li class=''>
+              <a href='/event/' title="极客活动">极客活动</a>
+            </li>
+            <li class='sub long '>
+              <a href='/jobs/recommend/' title="">极客工作吧</a>
+              <ul>
+                <li><a href="/jobs/recommend/">职务列表</a></li>
+                <li><a href="/jobs/welcome/">发布职位</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+
+        
+        <div class='tool-box'>
+          <ul>
+            <li class="sub follow">
+              <a href="http://weibo.com/geekpark" title="关注我们">关注我们</a>
+              <ul>
+                <li><a title="新浪微博: @geekpark" target="_blank" href="http://weibo.com/geekpark" class="social-media-icon sina">新浪微博</a></li>
+                
+                <li><a title="Twitter: @GeekParkNet" target="_blank" href="https://twitter.com/GeekParkNet" class="social-media-icon twitter">Twitter</a></li>
+                <li><a title="Google+: @geekpark" target="_blank" href="https://plus.google.com/117900237066383009895/" rel="publisher" class="social-media-icon google">Google+</a></li>
+                
+                <li><a title="RSS" target="_blank" href="http://feeds.geekpark.net/" class="social-media-icon rss">RSS订阅</a></li>
+                <li style="width:105px;"><a title="Email Service" target="_blank" href="http://eepurl.com/fzlSk" class="social-media-icon email">订阅活动通知</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="/observer/" title="产品观察家" style="color: cadetblue;">我要写观察</a>
+            </li>
+            <li class="first">
+              <a href='/user/login' title="登录">登录</a>
+            </li>
+            <li>
+              <a href='/user/register' title="注册">注册</a>
+            </li>
+          </ul>
+        </div>
+        <div id="search-area" class="sub">
+          <div id="search-btn"></div>
+          <ul>
+              <li>
+                <form id='search-form' name='global-search' action="/search/all" method="post">
+                  <input type='search' id='search' name='search' placeholder='搜索' value="" />
+                  <input type='submit' class='submit' value=''>
+                </form>
+              </li>
+            </ul>
+        </div>
+        <div id="ajaxing" style="display: none;"></div>
+      </div>
+      
+    </header>
+        <div id="main" role="main" class="container" itemscope itemtype="http://schema.org/Article">
+<div class="container">
+
+
+<article id="article">
+                        
+                
+    <h1 id="title" itemprop="name">
+        试析社交类 APP 的设计思路    </h1>
+    <div id="scrollto-comments"><a href="#comment">评论 (<span id="comments-count">0</span>)</a></div>
+    <div id="meta">
+         By <span id="author" itemprop="author"><a href="/user/home/index/194936">sieben</a></span> <i>｜</i> 
+         <span id="date" itemprop="datePublished" content="2013-12-13T09:12">2013/12/13</span>
+              </div>
+    <section id="section">
+        <div id="core-info">
+                                            <div class="img_container">
+                    <img src="http://geekpark-img.qiniudn.com/uploads/reading/cover/oJwLJHg3twOmTVzbO5cmqWnhB86lhv8E.png" class="head-image" itemprop="image"/>
+                </div>
+                        <p class="core-info-text" itemprop="description">
+                [核心提示] 社交类 APP 如何赢得市场和用户，还需要遵从以下几点：明确的客群定位；合理的撮合方式；适度的认证手段和行为记录功能；有效的推广方式；稳定的运行后台；清晰的盈利模式。            </p>
+        </div>
+        <div id="content" itemprop="articleBody">
+            <p><a href="http://www.geekpark.net/read/view/190510">社交</a>是人类作为社会性群体的基本属性，从人类诞生起，不管形式如何，不管是否在意识支配下，相信人类的社交活动从来不曾停止过，也正是基于此行为的不断重复、尝试和强化，才一点点的形成了语言、文字、书画以及艺术等社交活动的载体和产物，进而形成了它们的共同体&mdash;&mdash;民族，直到创造出人类灿烂的现代文明。</p>
+<p>在现今的社会条件下，社交的范畴得到了极大的扩张，我们生活中的每一个动作，每一个行为都直接或者间接地参与着社交活动。这些社交活动可能是关系型的，比如说工作；可能是倾向性的，比如说收听特定人的<a href="http://www.geekpark.net/read/view/110834">微博</a>；或者可能是交换型的，比如购买等。社交类 APP 作为&ldquo;线上应用&rdquo;是线下实际社交活动的在二维上（时间和空间）的自然延伸，是技术条件下的人类需求的必然产物。</p>
+<p>社交类 APP 应用基于自身在时间和空间上的相对无限性，能够充分满足个体的人临发性、随机性和即时性的社交需求；与此同时，社交类 APP 的线上非面对面的特征，也使得线上社交具有更低成本、更安全、更好的私密性等新属性优势。更为重要的是，线上的社交活动在有效的扩展了社交活动的时空范围、降低社交成本的同时，为存在特定社交障碍的个体提供了替代方案，更为重要的是对社交活动向线下迁移并不形成障碍。</p>
+<p>如何赢得市场和用户，还需要遵从以下几点：</p>
+<h2><strong>明确的客群定位</strong></h2>
+<p><strong></strong> 我们在上文讨论了社交是全体人类共有的基本需求，那么是不是所有人都需要使用 APP 应用的方式来进行社交活动呢？我们在设计一个社交类应用的时候，该如何对目标客群进行定位呢，是否可以按照人类全体为目标来进行？将人类全体作为目标来设计一个社交类 APP 应用是否可行，在理论上肯定行得通。</p>
+<p>是否要这么去做的关键点其实在于是否有这样的需求，也就是全人类是否需要一个 APP 应用能够满足他们跨种族、跨语言、跨时区和跨文化的<a href="http://www.geekpark.net/read/view/172831">需求</a>？答案很明显是否定的，起码在当前的社会结构条件下。 那么如何寻找和定位目标客群及其需求成为首要问题。</p>
+<p>简单来说就是，服务那些人，服务那些人的那些需求。那么我们就要对人类群体进行一个区分，最容易分群标准自然是国家和民族，其次是性别，再次是年龄层，再往下的细分的依据因为其评判角度的不同会存在近似无限的可能性，因此，可操作的方式是对客户进行分层&mdash;&mdash;比分群更细致的粒度。</p>
+<p>我们接下来讨论这样建议的原因。 客户分层之后可能获得相对较少的目标客户群，但同时也更容易发现现有产品没有覆盖到或者关注不够的&ldquo;蓝海&rdquo;客群，因而更容易满足客户的精确需求，并在此基础上形成产品用户之间的关系和产品功能，进而形成产品结构。如今市场上在如<a href="http://www.geekpark.net/read/view/194931">易信</a>、<a href="http://www.geekpark.net/read/view/174687">陌陌</a>、<a href="http://www.geekpark.net/read/view/169671">微信</a>等主流应用之外（分别代表熟人社交、陌生人社交、全体人社交），看似被瓜分殆尽的市场实际上存在着更广泛的细分市场，即长尾市场，这实际上才是市场的主流，为新应用出现和发展提供了足够空间。对客群的逐层细分，提供更精细的客户分群，精确定位功能，寻找自我市场空间。这个差异化竞胜原则实际上在现实生活中在不断实践。最近热播的电视剧《小爸爸》（非广告贴）里李三弟设计服装的出发点&mdash;&mdash;为那些被时尚和潮流遗忘的人设计服装。&nbsp;</p>
+<h2><strong>合理的撮合方式</strong></h2>
+<p><strong></strong> 撮合，也就是使得有社交需求的用户彼此被发现。这种撮合需要遵循两个基本原则，一个是价值性和用户的自主私密性。价值性指的是经过撮合使得用户发现的潜在社交对象是符合自己内心需求透过应用而实现的映射的，简单来说就是撮合完成的对象是他继续进行社交的目标。自主性指的是不管撮合的方式是用户触发还是程序匹配，客户得到的心理感受必须是用户自行选择的结果，换句话会所，对象不是被强塞进来的。</p>
+<p>私密性是一个对等的过程，即在相对的条件下，用户对社交对象的选择、和社交对象交流的内容、方式和过程等是在一个封闭的私密、安全的环境下进行的。 撮合的方式是自由选择的，可以是用户触发的，可以是程式选择推送的。其基础是用户关系，而用户关系的前提是客户分群和分层，其执行程式可能会涉及一定的数据库逻辑和算法。</p>
+<h2><strong>适度的认证手段和行为记录功能</strong></h2>
+<p>前面说了，社交线上应用是线下实体社交的在时间和空间上的自然延伸，是对人社交需求的满足。虽然这种需求可能是临时性或者随机性的，但却有着向更长久和更真实，直至线下实体社交发展的可能性和趋势。基于这种可能性和实际社交经验的模式影响，形成应用之于用户认证和行为记录的需求。这种在交往的过程中积累的经验教训和思维惯性，不管是实体的交往还是线上的虚拟的交往，对于交往对象信息的把握是有一定的要求的，这个因人而已，因实际需求而已。因此，应用需要有适宜的功能和呈现方式。</p>
+<h2><strong>有效的推广方式</strong></h2>
+<p>已经有很多人就这个问题进行讨论，包括国内和国外选择方式的不同，不做过多的引述，基本概括起来，有四个类别：下载市场和应用商店、APP 合作置换、社交媒体<a href="http://www.geekpark.net/read/view/124286">推广</a>（微信、微博和论坛）以及付费推广（广告、营销活动等）。这些方式被广泛利用也证明了其在 APP 推广上的功效，确实能在一定程度发挥功效。同时，作为社交类的 APP，其功能性决定了其最终向线下延伸和发展的特性，套用一个词，就是&ldquo;接地气&rdquo;，那么，社交类 APP 的推广是否存在其特殊性呢？ 答案是肯定的，社交类 APP 是线上和线下活动结合紧密的应用程式，而且通过对客群的精确分层和定位，能够有效识别社交活动进行的场地和范围，如此就为线上应用线下推广提供了天然的契机。通过线下的推广活动，同社交场所的提供者分摊费用，置换客户号召力，最近距离接触客户，自我营销。</p>
+<h2><strong>稳定的运行后台</strong></h2>
+<p>这是所有应用都必须考虑的大后方，因为后台是应用正常运行的最基本的保障，移动互联的&ldquo;快速上线，频繁迭代&rdquo;，只要不过分使用，是金科玉律。</p>
+<h2><strong>清晰的盈利模式</strong></h2>
+<p><strong></strong> 不是人人都如微信一般有着一个叫做腾讯的妈，更何况微信现在的盈利能力已经不容置疑。</p>
+<p>此外，考虑多一个问题可能更能体现咱们的不同： <em>离线状态下，APP 可以为客户提供什么</em>？实时在线的理想状态已经越来越清晰的接近现实，考虑这个问题似乎多余，但在离线状态下的世界，只有你存在，岂不是很美？</p>            <div id="copyright">
+                <p>除非特别声明，极客观察均为极客公园原创报道，转载请注明作者及原文链接。</p>
+    <p>原文地址：<a class="permalink" href="/read/view/195041">http://www.geekpark.net/read/view/195041</a></p>            </div>
+                            <div id="tags" itemprop="articleSection">
+                相关话题：
+                                    <span class="tag"><a href="/tag/社交网络APP">社交网络APP</a></span>
+                                    <span class="tag"><a href="/tag/社交网络">社交网络</a></span>
+                                    <span class="tag"><a href="/tag/手机应用">手机应用</a></span>
+                            </div>
+        </section>
+                
+<div id="action">
+    <div id="like_it" class="like_it">
+        喜欢（<span id="like-count">1</span>）
+        <label>195041</label>
+        <div class="sprite-bg"></div>
+    </div>
+    <div id="share">
+        分享（<span id="share-count">1</span>）
+        <div class="sprite-bg"></div>
+        <div id="social-networks-wrapper">
+            <div class="share-border1"></div>
+            <div class="share-border2"></div>
+            <ul id="social-networks">
+                <li id="sns-weibo" class="sina" onclick="GPshareTo('sina', 'http://www.geekpark.net/read/view/195041?u=0');"><a title="分享到新浪微博" onclick="GPshareTo('sina', 'http://www.geekpark.net/read/view/195041?u=0');">0</a></li>
+                <li id="sns-qq" class="tencent" onclick="GPshareTo('tencent', 'http://www.geekpark.net/read/view/195041?u=0');"><a onclick="GPshareTo('tencent', 'http://www.geekpark.net/read/view/195041?u=0');">1</a></li>
+                <li id="sns-douban" class="douban" onclick="GPshareTo('douban', 'http://www.geekpark.net/read/view/195041?u=0');"><a onclick="GPshareTo('douban', 'http://www.geekpark.net/read/view/195041?u=0');">0</a></li>
+                <li id="sns-twitter" class="twitter" onclick="GPshareTo('twitter', 'http://www.geekpark.net/read/view/195041?u=0');"><a onclick="GPshareTo('twitter', 'http://www.geekpark.net/read/view/195041?u=0');">0</a></li>
+                <li id="sns-googleplus" class="gplus" onclick="GPshareTo('gplus', 'http://www.geekpark.net/read/view/195041?u=0');"><a onclick="GPshareTo('gplus', 'http://www.geekpark.net/read/view/195041?u=0');">0</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+    </div>
+</article>
+
+
+
+<div id="dt_MRecVAV">
+
+</div>
+<a name='comment'></a>
+        <div class="ebox-mt container2" id="comment">
+            <div class="comment-wrap">
+                <div class="comment-bd" style="margin-top:0;">
+                   <form id='comment-box' class="format comment-form">
+    <div class="avatar"> 
+            <img src="http://geekpark-img.qiniudn.com/uploads/anonymous_avatar/7_130.jpg" alt="avatar"> 
+        </div>
+    <input id="parent_id" name="parent_id" type="hidden" value="0">
+    <div class="box_father">
+    <div class="ajax-box"></div>
+    <textarea id='content' placeholder="发表新评论" name="content" class='text'></textarea>
+    <p class="loginname-box">
+    <input type="text" value="" name="loginname" class="text" placeholder="邮箱" maxlength="128">
+    <p class="customname-box">
+    <input type="text" value="" name="customname" class="text" placeholder="昵称（2-16位，允许中文字符）" maxlength="32">
+    </p>
+    <p class="captcha-box">
+    <input type="text" name="captcha" maxlength="4" class="text" placeholder="请输入右侧验证码">
+    <input type="password" name="captcha" class="text password" placeholder="密码">
+    <span class="captcha-img"></span>
+    </p>
+    <p class="anonymous"><label class="anonymous_label main_icons">
+        <input type="checkbox" name="anonymous" class="anonymous-checkbox"> 匿名发表</label>
+    </p>
+    <p class='act'>
+        <input type='submit' class='submit png_bg' value='发言'>
+    </p>
+    </div>
+</form>
+<div id='comments'></div>
+                </div>
+
+                <div class="comment-hd mt">
+                    <a class="title" href="#">新浪微博评论</a>
+                </div>
+
+                
+                    
+                    
+            </div>
+
+        </div>
+<aside id="sidebar">
+    <div id="ad1" class="ad">
+        <div class="ad-corner"></div>
+        <a href="http://gpk.im/qtkv"><img src="http://geekpark.net/uploads/event/comment/c4368e5cd00252083e9d5b3106f7d3eb.jpg" /></a>
+    </div>
+    <div id="author-info">
+        <h4 id="side-author-title">作者</h4>
+          <div id="gray_bg">
+            <a id="author-link" href="/user/home/index/194936">
+                <img id="author-avatar" src="http://geekpark-img.qiniudn.com/uploads/anonymous_avatar/1_130.jpg" />
+            </a>
+            <div id="author-rightpart">
+                <a id="author-link" href="/user/home/index/194936" class="anchor-name"><span class="author-name">sieben</span> （产品观察家）</a><span class="author-job"></span>
+                <div class="author-says">
+                    谦虚好学小产品                </div>
+            </div>
+          </div>
+    </div>
+    
+    <div id="auther-otherinfo">
+                                                <a id="author-sina" class="link-icon" href="#" title="作者的新浪微博"></a>
+        <div id="author-other-articles-bg"></div>
+        <a id="author-other-articles" href="/user/home/seeds/194936" title="作者的所有文章">查看我的1篇文章</a>
+    </div>
+    <div id="observer-apply">
+        也想发表文章？<br /> 上千人已成为产品观察家！        <a href="/observer/apply">
+            <button>马上了解</button>
+        </a>
+    </div>
+    <div>
+        <h3 id="geek-observe-title">极客观察</h3>
+        <div id="side-tag">
+            <div id="newest-tag">最新</div>
+            <div id="recommend-tag" class="closing-tag">推荐</div>
+        </div>
+        <ul id="newest" class="side-articles">
+                        <li><a href="/read/view/195039"><div>
+                <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/tJ6Tgt5BcGHNVZpAGpc9U4jtfN1iYTo3.jpg?imageView/2/w/63/q/100"/></div>
+                <h5 class="side-article-title">回顾 2013 年科技界的 9 大创新</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">慢君</span>
+                    <span class="side-article-date">2013/12/13</span>
+                </div>
+            </div></a></li>
+                        <li><a href="/read/view/195041"><div>
+                <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/oJwLJHg3twOmTVzbO5cmqWnhB86lhv8E.png?imageView/2/w/63/q/100"/></div>
+                <h5 class="side-article-title">试析社交类 APP 的设计思路</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">sieben</span>
+                    <span class="side-article-date">2013/12/13</span>
+                </div>
+            </div></a></li>
+                        <li><a href="/read/view/195042"><div>
+                <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/qV8D5XNvIH4mcaPkJ926niObVWQGoDbX.png?imageView/2/w/63/q/100"/></div>
+                <h5 class="side-article-title">Pocket 5.0：提炼你的 Pocket</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">桥之暗面</span>
+                    <span class="side-article-date">2013/12/13</span>
+                </div>
+            </div></a></li>
+                        <li><a href="/read/view/195037"><div>
+                <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/EQTfzvkpLGOr4hxDidBhquy4rBngrgl9.jpg?imageView/2/w/63/q/100"/></div>
+                <h5 class="side-article-title">十亿新赌局 | 极客早知道 2013 年 12 月 13 日</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">诸神之黄昏</span>
+                    <span class="side-article-date">2013/12/13</span>
+                </div>
+            </div></a></li>
+                        <li><a href="/read/view/194998"><div>
+                <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/A96No5AzenObIw2wecYyI98GXxrckBqW.jpg?imageView/2/w/63/q/100"/></div>
+                <h5 class="side-article-title">【创新产品评选50强巡演】豌豆荚应用内搜索：不只是应用商店</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">慢君</span>
+                    <span class="side-article-date">2013/12/12</span>
+                </div>
+            </div></a></li>
+                        <li><a href="/read/view/194992"><div>
+                <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/HWMaETARNqd56f3KWi61cIdDuSPVtYoN.jpg?imageView/2/w/63/q/100"/></div>
+                <h5 class="side-article-title">【创新产品评选50强巡演】景点通轻应用：随时随地的旅游手册</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">阿呆</span>
+                    <span class="side-article-date">2013/12/12</span>
+                </div>
+            </div></a></li>
+                        <li><a href="/read/view/194986"><div>
+                <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/6Mso12v678ispitLNMb7gWn20ITePB6v.png?imageView/2/w/63/q/100"/></div>
+                <h5 class="side-article-title">2013 中国互联网创新产品评选深圳站巡演集锦</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">诸神之黄昏</span>
+                    <span class="side-article-date">2013/12/12</span>
+                </div>
+            </div></a></li>
+                        <li><a href="/read/view/194990"><div>
+                <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/w6yS1RUFxNd1eWksHMci7cTqCBNlUod1.png?imageView/2/w/63/q/100"/></div>
+                <h5 class="side-article-title">在纽交所跑的汽车 | 极客早知道2013年12月12日</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">阿呆</span>
+                    <span class="side-article-date">2013/12/12</span>
+                </div>
+            </div></a></li>
+                        <li><a href="/read/view/194984"><div>
+                <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/webuUugwk6cT2scoLv0yW36qJQ3ptsSz.jpg?imageView/2/w/63/q/100"/></div>
+                <h5 class="side-article-title">【创新产品评选50强巡演】Air.Air!：当极客开始关注健康</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">一川</span>
+                    <span class="side-article-date">2013/12/11</span>
+                </div>
+            </div></a></li>
+                        <li><a href="/read/view/194944"><div>
+                <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/I9VGXu5JNGWgKcdYuvmzkhUjILE8hoD5.jpg?imageView/2/w/63/q/100"/></div>
+                <h5 class="side-article-title">像乔布斯一样演讲，离不开这四个工具</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">Jason2be</span>
+                    <span class="side-article-date">2013/12/11</span>
+                </div>
+            </div></a></li>
+                    </ul>
+        <ul id="recommend" class="side-articles">
+                        <li><a href="/read/view/192473"><div>
+                 <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/FjgLlzusntEsXp5yLvyLs4BoIlHxWITo.jpg?imageView/2/w/63/q/100" /></div>
+                <h5 class="side-article-title">硅谷观察（一）从古罗马到硅谷：连接历史和未来</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">周恒星</span>
+                    <span class="side-article-date">2013/11/13</span>
+                </div>
+            </div></a></li>
+                        <li><a href="/read/view/173517"><div>
+                 <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/9NQoLTRTyxbWVXJeNWyKWFoSJk8AtxB4.png?imageView/2/w/63/q/100" /></div>
+                <h5 class="side-article-title">张小龙专访系列（1）：关于微信你可能不知道的10件事</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">阿禅</span>
+                    <span class="side-article-date">2013/03/05</span>
+                </div>
+            </div></a></li>
+                        <li><a href="/read/view/173354"><div>
+                 <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/x1v2C6IEbjaZxJt9aHBP9vMYbXvlAnZm.png?imageView/2/w/63/q/100" /></div>
+                <h5 class="side-article-title">程序员必看的10个TED演讲</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">黑板报值日生</span>
+                    <span class="side-article-date">2013/03/03</span>
+                </div>
+            </div></a></li>
+                        <li><a href="/read/view/172157"><div>
+                 <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/3G2XYCbx89wRQBnEuX2eT7PHyEMTrCEh.png?imageView/2/w/63/q/100" /></div>
+                <h5 class="side-article-title">那些解释起来很蛋疼的挨踢工种</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">小浣</span>
+                    <span class="side-article-date">2013/01/27</span>
+                </div>
+            </div></a></li>
+                        <li><a href="/read/view/171243"><div>
+                 <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/uKg7UHs5vXnIZQCmGWHixVCAKpLgnjfW.jpg?imageView/2/w/63/q/100" /></div>
+                <h5 class="side-article-title">王俊煜：巧用工具提高团队生产力</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">极客公园</span>
+                    <span class="side-article-date">2013/01/11</span>
+                </div>
+            </div></a></li>
+                        <li><a href="/read/view/166849"><div>
+                 <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/5Hr4p7zC9sOWEbDSUnaBSOzQaFdUP1UT.jpeg?imageView/2/w/63/q/100" /></div>
+                <h5 class="side-article-title">什么是好的用户体验</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">极客公园</span>
+                    <span class="side-article-date">2012/11/20</span>
+                </div>
+            </div></a></li>
+                        <li><a href="/read/view/165972"><div>
+                 <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/gJWzONQYD9Xhwir5yJYHkVlN2NX0YnJ3.png?imageView/2/w/63/q/100" /></div>
+                <h5 class="side-article-title">啪啪的崛起与语音应用的思考</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">夹克张</span>
+                    <span class="side-article-date">2012/11/02</span>
+                </div>
+            </div></a></li>
+                        <li><a href="/read/view/161344"><div>
+                 <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/N6oaTSiQUFESEDGuZGMwouFtQrtZLcXy.jpg?imageView/2/w/63/q/100" /></div>
+                <h5 class="side-article-title">管中窥豹 - 从草榴看论坛的现状与未来</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">极客公园</span>
+                    <span class="side-article-date">2012/07/21</span>
+                </div>
+            </div></a></li>
+                        <li><a href="/read/view/160821"><div>
+                 <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/3nNKzPyvQGXrtTDqLn1QbR0NOnJLotqX.png?imageView/2/w/63/q/100" /></div>
+                <h5 class="side-article-title">唱吧火爆背后的娱乐需求</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">depthsky</span>
+                    <span class="side-article-date">2012/07/13</span>
+                </div>
+            </div></a></li>
+                        <li><a href="/read/view/160793"><div>
+                 <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/u5oDCFUK0zHJx2hlphKnyuQ1CSjs79NB.png?imageView/2/w/63/q/100" /></div>
+                <h5 class="side-article-title">Jing.fm，音乐的历程</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">detecti1914</span>
+                    <span class="side-article-date">2012/07/13</span>
+                </div>
+            </div></a></li>
+                        <li><a href="/read/view/156464"><div>
+                 <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/B2eqncorN6HruEprdkC9x3rIwF9wT3c0.png?imageView/2/w/63/q/100" /></div>
+                <h5 class="side-article-title">Instagram 完全新手指南</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">Afio</span>
+                    <span class="side-article-date">2012/04/12</span>
+                </div>
+            </div></a></li>
+                        <li><a href="/read/view/156091"><div>
+                 <div class="side-article-cover-box"><img class="side-article-cover" src="http://geekpark-img.qiniudn.com/uploads/reading/cover/nuNhc3M0DtkmxeJNeoFcIzikQ8BycdB6.png?imageView/2/w/63/q/100" /></div>
+                <h5 class="side-article-title">为什么成人网站Snatchly 如此流行？</h5>
+                <div class="side-article-meta">
+                    <span class="side-article-author">极客公园</span>
+                    <span class="side-article-date">2012/04/02</span>
+                </div>
+            </div></a></li>
+                    </ul>
+    </div>
+            <div id="ad3" class="ad">
+            <div class="sp-corner"></div>
+            <a href="http://www.geekpark.net/event/detail/194348"><img src="http://geekpark.net/uploads/event/comment/ffc97aea30306a83ad90cb581c5b78c1.png" /></a>
+        </div>
+            <div id="ad4" class="ad">
+            <div class="sp-corner"></div>
+            <a href="http://innoawards.geekpark.net/poll"><img src="http://geekpark.net/uploads/event/comment/62036b78c5d8fb2557577092975e6a69.jpg" /></a>
+        </div>
+            <div id="ad5" class="ad">
+            <div class="sp-corner"></div>
+            <a href="http://www.geekpark.net/read/view/194787"><img src="http://geekpark.net/uploads/event/comment/249d8f4275ee31c45f5953b0cd368340.jpg" /></a>
+        </div>
+            <div id="ad6" class="ad">
+            <div class="sp-corner"></div>
+            <a href="http://www.geekpark.net/read/view/190351"><img src="http://geekpark.net/uploads/event/comment/bfd71de067d775673c678ae2223766d7.png" /></a>
+        </div>
+    </aside>
+
+</div>
+
+
+
+</div>
+
+    </div>
+    <footer id="footer">
+      <div class="container">
+        <div class="col">
+          <div class="footer-title">极客公园</div>
+          <ul class="footer-content">
+            <li><a title="关于极客公园" href="/pub/about">关于我们</a></li>
+            <li><a title="加入我们" href="/job" target="_blank">加入我们</a></li>
+            <li><a title="访问移动版" class="jump-to-mobile">访问移动版</a></li>
+            <li><a title="产品求关注" href="/clue/" target="_blank">产品求关注</a></li>
+            
+          </ul>
+        </div>
+        
+        <div class="col">
+          <div class="footer-title">实验室</div>
+          <ul class="footer-content">
+            <li><a title="极客公园 - Google Reader 归档计划" href="/lab/google_reader">Google Reader 归档计划</a></li>
+            <li><a title="极客早知道 - iOS 客户端" href="https://itunes.apple.com/us/app/ji-ke-zao-zhi-dao/id629628618?mt=8">极客早知道：iOS 版</a></li>
+            <li><a href="http://book.duokan.com/search/%E6%9E%81%E5%AE%A2%E5%85%AC%E5%9B%AD/1" title="极客公园 - 多看月刊">极客公园月刊</a></li>
+          </ul>
+        </div>    
+
+        <div class="col">
+          <div class="footer-title">订阅</div>
+          <ul class="footer-content">
+            <li><a class="social-media-icon rss" title="RSS" target="_blank" href="http://feeds.geekpark.net/">RSS订阅</a></li>
+            <li><a class="social-media-icon email" title="Email Service" target="_blank" href="http://eepurl.com/fzlSk">活动通知订阅</a></li>
+          </ul>
+        </div>
+        <div class="col social-media">
+          <div class="footer-title">关注我们</div>
+          <ul class="footer-content">
+            <li><a class="social-media-icon sina" title="新浪微博: @geekpark" target="_blank" href="http://weibo.com/geekpark">新浪微博</a></li>
+            <li><a class="social-media-icon tencent" title="腾讯微博: @geekparknet" target="_blank" href="http://t.qq.com/geekparknet">腾讯微博</a></li>
+            <li><a class="social-media-icon twitter" title="Twitter: @GeekParkNet" target="_blank" href="https://twitter.com/GeekParkNet">Twitter</a></li>
+            <li><a class="social-media-icon gplus" title="Google+: @geekpark" target="_blank" href="https://plus.google.com/117900237066383009895/" rel="publisher">Google+</a></li>
+            <li><a class="social-media-icon huaban" title="花瓣网: @geekpark" target="_blank" href="http://huaban.com/geekpark">花瓣网</a></li>
+            <li><a class="social-media-icon renren" title="人人小站: @geekpark" target="_blank" href="http://zhan.renren.com/geekpark">人人小站</a></li>
+            <li><a class="social-media-icon diandian" title="点点: @geekparknet" target="_blank" href="http://geekparknet.diandian.com/">点点</a></li>
+            <li><img class="weixin-qrcode" title="在微信里搜索“极客公园”或在手机上扫描本二维码添加极客公园微信帐号" width="200" height="200" alt="GeekPark 微信" src="/public/css/images/geekpark-weixin.png" style="display: none;"><a class="social-media-icon weixin" title="微信" href="JavaScript:void(0);">微信</a></li>
+          </ul>
+        </div>
+        <div class="col cp">
+          <div class="support">
+            <p>图片存储由<a href="http://gpk.im/qiniu"> 七牛云存储 </a>提供</p>
+          </div>
+          <div class="copyright ICP">
+            <p>Copyright &copy; 2009 - 2013</p>
+            <p>北京中明万长管理咨询有限公司</p>
+          </div>
+          <div class="ICP">
+            <p>京ICP备09035963号</p>
+            <p>京公网安备110105001682号</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <div id="scrollTop" style="display:none;">
+    <div class="level-2"></div>
+    <div class="level-3"></div>
+  </div>
+  
+  
+  
+  
+  
+   
+  
+  
+   
+  
+      
+  
+   <div class="feedback-btn">
+    <a class="fancybox fancybox.ajax zh-cn" title="用户反馈" target="_blank" href="/rhea/feedback_reply_form/"><i></i> 用 户 反 馈 </a>
+  </div>​ 
+
+  
+
+</body>
+</html>

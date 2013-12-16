@@ -1,0 +1,22 @@
+// FileName : IMSLstringtable.h
+// Creator  : luis yang
+// Date     : 2011-07-12
+// Comment  : stringtable
+
+#ifndef __IMSL_STRINGTABLE_H__
+#define __IMSL_STRINGTABLE_H__
+extern string strfullpath;
+#define USERDICPATH const_cast<char*>((strfullpath+"/config/userdic.txt").c_str())
+#define CABBPATH const_cast<char*>((strfullpath+"/config/companyabb.txt").c_str())
+#define PABBPATH const_cast<char*>((strfullpath+"/config/peopleabb.txt").c_str())
+#define EWWPATH const_cast<char*>((strfullpath+"/config/etwwords.txt").c_str())
+#define CONFIGPATH const_cast<char*>((strfullpath+"/config/sqlconfig.conf").c_str())
+#define CLISTPATH const_cast<char*>((strfullpath+"/config/companylist.txt").c_str())
+#define TWPABBPATH const_cast<char*>((strfullpath+"/config/twowordspeopleabb.txt").c_str())
+#define USERWORDSPATH const_cast<char*>((strfullpath+"/config/userwords.txt").c_str())
+#define COMPANYWORDSPATH const_cast<char*>((strfullpath+"/config/comandmanwords.txt").c_str())
+#define SEGCORRECTIONPATH const_cast<char*>((strfullpath+"/config/segcorrection.txt").c_str())
+#define PIPEFILEPATH (strfullpath+"/mypipe_fifo").c_str()
+
+#endif //__IMSL_STRINGTABLE_H__
+

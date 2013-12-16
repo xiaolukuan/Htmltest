@@ -1,0 +1,94 @@
+#include "CIMSLLog.h"
+CIMSLLog theLog;
+CIMSLLog::CIMSLLog() 
+{
+	m_level="";
+	m_strlogprojname="IMSL";
+	m_logpath="";
+	pthread_mutex_init(&log_mutex,NULL);
+}
+CIMSLLog::~CIMSLLog()
+{
+	pthread_mutex_destroy(&log_mutex);
+}
+bool CIMSLLog::CreateLog()
+{
+	string strloghead = m_strlogprojname+"Log V2.0.0.0\n";
+	char *pdate = GetLocalTime();
+	string strdate = pdate;
+	strdate = strdate.substr(0,strdate.find(" "));
+	delete[] pdate;
+	Makedir(m_logpath.c_str(),"log");
+	string strlogfile = m_logpath + "log/" + m_level + m_strlogprojname + strdate + "log.txt";
+	if (access(strlogfile.c_str(),F_OK) == 0 && GetFilenSize(strlogfile.c_str())>10)
+	{
+		fout.open(strlogfile.c_str(),std::ios::app|std::ios::out);
+	}
+	else
+	{
+		
+		fout.open(strlogfile.c_str());
+		fout.write(strloghead.c_str(),strloghead.length());
+	}
+	return true;
+}
+void CIMSLLog::SetLogFilePath(string logfilepath)
+{
+	if((int)logfilepath.length() > 0 )
+	{
+		if (logfilepath.substr(logfilepath.length()-1)=="/")
+		{
+			m_logpath = logfilepath;
+		} 
+		else
+		{
+			m_logpath = logfilepath+"/";
+		}
+	}
+	else
+	{
+		m_logpath = "./";
+	}
+}
+void CIMSLLog::SetLogLevel(int level)
+{
+	switch(level)
+	{
+	case LOG_LEVEL_SYS:
+			 m_level = "sys";
+			 break;
+	case LOG_LEVEL_ERROR:
+			 m_level = "error";
+			 break;
+	default:
+		break;
+	}
+}
+void CIMSLLog::SetLogProjName(string strpname)
+{
+    m_strlogprojname = strpname;
+}
+bool CIMSLLog::WriteLog(int level,const char *fmt,...)
+{
+	pthread_mutex_lock(&log_mutex);
+	SetLogLevel(level);
+	CreateLog();
+	std::string strwrite = "";
+	char *strtime = GetLocalTime();
+	strwrite.append(strtime,strlen(strtime));
+	char buf[1024];
+	va_list ap;
+	va_start( ap, fmt );
+	vsprintf( buf, fmt, ap );
+	va_end ( ap );
+	strwrite += "  ";
+	strwrite += buf;
+	strwrite.append("\n",1);
+	fout.write(strwrite.c_str(),strwrite.size());
+	fout.close();
+	delete []strtime;
+	pthread_mutex_unlock(&log_mutex);
+	return true;
+}
+
+
